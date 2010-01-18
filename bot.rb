@@ -6,16 +6,17 @@
 # MIT and all that
 
 # Usage: 
-#   Botty = BotEatr.new("UserName", "Password")
+#   Botty = BotEatr.new("UserName", "Password", "File")
 #   Botty.baitBots
 
 class BotEatr
-  attr_accessor :username, :password
+  attr_accessor :username, :password, :file
   
   #blah blah blah boring
-  def initialize(username, password)
+  def initialize(username, password, file)
     @username = username
     @password = password
+    @file = file
   end
   
   def sendTweet(tweet)
@@ -26,7 +27,7 @@ class BotEatr
   
   def baitBots #if you build it, they will come
     #replace tweets.dat with whatever, to build your giant array of spammy tweets
-    tweets = File.read("tweets.dat").split(',')
+    tweets = File.read("#{@file}").split(',')
     tweets.each do |tweet|
       sendTweet(tweet)
       # (60secs X 60 mins) / 24secs = 150 API updates per hour (which is the limit)
